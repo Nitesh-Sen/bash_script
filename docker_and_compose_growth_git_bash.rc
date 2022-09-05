@@ -1,0 +1,12 @@
+#!/bin/bash
+
+yum update -y
+
+##docker installation
+yum update -y && yum install docker -y && systemctl start docker && docker ps
+
+##git installation and cloning repository
+yum install git -y && cd /home/ec2-user/ && git clone https://github.com/growthbook/growthbook.git
+
+##docker compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null && sudo chmod +x /usr/local/bin/docker-compose && ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose && docker-compose --version && cd /home/ec2-user/growthbook && docker-compose up -d
