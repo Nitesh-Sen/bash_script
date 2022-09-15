@@ -1,0 +1,126 @@
+#!/bin/bash
+
+yum update -y
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+yum install amazon-linux-extras -y
+amazon-linux-extras | grep php
+yum install amazon-linux-extras php7.4
+amazon-linux-extras enable php7.4
+yum clean metadata
+yum install php-cli php-pdo php-fpm php-json php-mysqlnd -y
+yum install php php-common php-pear -y
+yum install php-{cgi,curl,mbstring,gd,mysqlnd,gettext,json,xml,fpm,intl,zip}  -y
+yum install php-curl php-mbstring php-intl php-opcache php-soap php-gd php-xml php-mysqli -y
+aws s3 cp s3://mynewonebucket/latest.tar.gz /var/www/html/
+cd /var/www/html
+tar xzvf latest.tar.gz
+mv wordpress/* ./
+chown -R apache:apache /var/www/html/*
+cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+rm -rf index.html
+systemctl restart httpd
+systemctl reload httpd
+
+
+
+#!/bin/bash
+
+aws s3 cp s3://mynewonebucket/nitu.sh /home/ec2-user
+/usr/bin/bash /home/ec2-user/nitu.sh
+sed -i 's/database_name_here/niteshDB/' /var/www/html/wp-config.php
+sed -i 's/username_here/niteshuser/' /var/www/html/wp-config.php
+sed -i 's/password_here/niteshpassword/' /var/www/html/wp-config.php
+sed -i 's/localhost/RDSendpoint/' /var/www/html/wp-config.php
+systemctl restart httpd
+systemctl reload httpd
+
+
+
+
+
+
+###########################################################################################
+Wordpress 2 file
+
+
+
+#!/bin/bash
+
+yum update -y
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+yum install amazon-linux-extras -y
+amazon-linux-extras | grep php
+yum install amazon-linux-extras php7.4
+amazon-linux-extras enable php7.4
+yum clean metadata
+yum install php-cli php-pdo php-fpm php-json php-mysqlnd -y
+yum install php php-common php-pear -y
+yum install php-{cgi,curl,mbstring,gd,mysqlnd,gettext,json,xml,fpm,intl,zip}  -y
+yum install php-curl php-mbstring php-intl php-opcache php-soap php-gd php-xml php-mysqli -y
+cd /var/www/html
+wget http://wordpress.org/latest.tar.gz
+cd /var/www/html
+tar xzvf latest.tar.gz
+mv wordpress/* ./
+chown -R apache:apache /var/www/html/*
+cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+rm -rf index.html
+systemctl restart httpd
+systemctl reload httpd
+sed -i 's/database_name_here/wpDB/' /var/www/html/wp-config.php
+sed -i 's/username_here/admin/' /var/www/html/wp-config.php
+sed -i 's/password_here/password/' /var/www/html/wp-config.php
+sed -i 's/localhost/database-1.cwvgkgatdbuz.us-east-1.rds.amazonaws.com/' /var/www/html/wp-config.php
+systemctl restart httpd
+systemctl reload httpd
+
+
+
+
+
+
+
+
+
+
+###########################################################################################
+
+Wordpress 3 file
+#!/bin/bash
+
+yum update -y
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+yum install amazon-linux-extras -y
+amazon-linux-extras | grep php
+yum install amazon-linux-extras php7.4
+amazon-linux-extras enable php7.4
+yum clean metadata
+yum install php-cli php-pdo php-fpm php-json php-mysqlnd -y
+yum install php php-common php-pear -y
+yum install php-{cgi,curl,mbstring,gd,mysqlnd,gettext,json,xml,fpm,intl,zip}  -y
+yum install php-curl php-mbstring php-intl php-opcache php-soap php-gd php-xml php-mysqli -y
+aws s3 cp s3://mynewonebucket/latest.tar.gz /var/www/html/
+cd /var/www/html
+tar xzvf latest.tar.gz
+mv wordpress/* ./
+chown -R apache:apache /var/www/html/*
+cp /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+rm -rf index.html
+sed -i 's/database_name_here/wpDB/' /var/www/html/wp-config.php
+sed -i 's/username_here/admin/' /var/www/html/wp-config.php
+sed -i 's/password_here/password/' /var/www/html/wp-config.php
+sed -i 's/localhost/RDSendpoint/' /var/www/html/wp-config.php
+systemctl restart httpd
+systemctl reload httpd
+
+
+#!/bin/bash
+
+aws s3 cp s3://mynewonebucket/nitu.sh /home/ec2-user
+/usr/bin/bash /home/ec2-user/nitu.sh
