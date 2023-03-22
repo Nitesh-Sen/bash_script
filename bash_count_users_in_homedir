@@ -1,0 +1,18 @@
+#!/bin/bash
+#list all the dir in /home to check the users home dir, check all the dir one by one to veerify user
+RED='\033[0;31m'
+Green='\033[0;32m'
+Yellow='\033[0;33m'
+NC='\033[0m' # No Color
+for userdir in `ls /home/`
+        do
+        echo $userdir
+        id $userdir &> /dev/null
+        if [ $? -ne 0 ]; then
+                echo -e "${RED} $userdir ${NC} not found"
+        else
+                echo -e "${GREEN} $userdir ${NC} found on system"
+        fi
+
+        echo ""
+done
